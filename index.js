@@ -1,19 +1,20 @@
 const { getOptions } = require('loader-utils')
 const validateOptions = require('schema-utils')
 const marked = require('marked')
-const yaml = require('yaml-front-matter')
+const matter = require('gray-matter')
 
 const schema = {
   type: 'object',
   properties: {
-    markedOptions: { type: 'object' }
+    markedOptions: { type: 'object' },
+    grayMatterOptions: { type: 'object' }
   }
 }
 
 module.exports = function loader(source) {
   const options = getOptions(this) || {}
   validateOptions(schema, options, 'Markdown Loader')
-  const md = yaml.loadFront(source)
-  md.__content = marked(md.__content, options.markedOptions || null)
+  const md = matter(source, options.grayMatterOptions || {})
+  md.content = marked(md.content, options.markedOptions || {})
   return `module.exports = ${JSON.stringify(md)}`
 }
