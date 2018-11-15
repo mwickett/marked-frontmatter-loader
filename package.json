@@ -1,7 +1,7 @@
 {
-  "name": "markdown-loader",
+  "name": "marked-frontmatter-loader",
   "version": "0.0.1",
-  "description": "A webpack markdown loader that parses front matter and accepts custom marked instances",
+  "description": "A webpack markdown loader that parses front matter and accepts marked options",
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -21,8 +21,6 @@
     "yaml-front-matter": "^4.0.0"
   },
   "devDependencies": {
-    "babel-jest": "^23.6.0",
-    "babel-preset-env": "^1.7.0",
     "jest": "^23.6.0",
     "memory-fs": "^0.4.1",
     "webpack": "^4.25.1"

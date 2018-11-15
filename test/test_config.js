@@ -1,11 +1,12 @@
-import path from 'path'
-import webpack from 'webpack'
-import memoryfs from 'memory-fs'
+const path = require('path')
+const webpack = require('webpack')
+const memoryfs = require('memory-fs')
 
-export default (fixture, options = {}) => {
+module.exports = (fixture, options = {}) => {
   const compiler = webpack({
+    cache: false,
     context: __dirname,
-    entry: `./${fixture}`,
+    entry: `${fixture}`,
     output: {
       path: path.resolve(__dirname),
       filename: 'bundle.js'
@@ -16,9 +17,7 @@ export default (fixture, options = {}) => {
           test: /\.md$/,
           use: {
             loader: path.resolve(__dirname, '../index.js'),
-            options: {
-              name: 'test'
-            }
+            options
           }
         }
       ]
